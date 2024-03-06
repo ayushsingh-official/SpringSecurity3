@@ -11,4 +11,9 @@ public class HelloController {
 		return "Spring Basic Auth Works";
 	}
 
+	@GetMapping("/bye")
+	public String bye() {
+		return "cee yaa";
+	}
+
 }
