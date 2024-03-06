@@ -30,9 +30,10 @@ public class MySecurityConfig {
 
 		http.httpBasic(Customizer.withDefaults());
 //		http.authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated());
-		http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/hello").authenticated());
+//		http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/hello").authenticated());
+		http.authorizeHttpRequests(
+				authorize -> authorize.requestMatchers("/hello").authenticated().anyRequest().denyAll());
 
 		return http.build();
 	}
-
 }
