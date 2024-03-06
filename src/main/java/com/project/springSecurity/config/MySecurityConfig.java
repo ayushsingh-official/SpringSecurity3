@@ -1,4 +1,4 @@
-package com.project.springSecurity;
+package com.project.springSecurity.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,15 +14,15 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class MySecurityConfig {
 
-	@Bean
-	UserDetailsService UserdetailService() {
-		InMemoryUserDetailsManager userDetails = new InMemoryUserDetailsManager();
-		UserDetails user = User.withUsername("ayush").password(passwordEncode().encode("ayush.singh@security"))
-				.authorities("read").build();
-
-		userDetails.createUser(user);
-		return userDetails;
-	}
+//	@Bean
+//	UserDetailsService UserdetailService() {
+//		InMemoryUserDetailsManager userDetails = new InMemoryUserDetailsManager();
+//		UserDetails user = User.withUsername("ayush").password(passwordEncode().encode("ayush.singh@security"))
+//				.authorities("read").build();
+//
+//		userDetails.createUser(user);
+//		return userDetails;
+//	}
 
 	@Bean
 	BCryptPasswordEncoder passwordEncode() {
