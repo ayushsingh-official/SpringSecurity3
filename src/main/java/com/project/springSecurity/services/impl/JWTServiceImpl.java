@@ -18,9 +18,12 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JWTServiceImpl implements JWTServices {
 
-	private String generateToken(UserDetails userDetails) {
+	@Override
+	public String generateToken(UserDetails userDetails) {
 
-		return Jwts.builder().setSubject(userDetails.getUsername()).setIssuedAt(new Date(System.currentTimeMillis()))
+		return Jwts.builder()
+				.setSubject(userDetails.getUsername())
+				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
 				.signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
 	}

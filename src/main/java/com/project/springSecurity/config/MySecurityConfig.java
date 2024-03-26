@@ -56,10 +56,12 @@ public class MySecurityConfig {
 //		http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/hello").authenticated());
 		
 		http.csrf(AbstractHttpConfigurer::disable);
-		http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/login").permitAll()
-				.requestMatchers("admin").hasAnyAuthority(Role.ADMIN.name())
-				.requestMatchers("user").hasAnyAuthority(Role.USER.name())
-				.anyRequest().authenticated());
+		http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/auth/**")
+				.permitAll()
+				.requestMatchers("/admin/**").hasAnyAuthority(Role.ADMIN.name())
+				.requestMatchers("/user/**").hasAnyAuthority(Role.USER.name())
+				.anyRequest()
+				.authenticated());
 
 		http.sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 		http.authenticationProvider(authenticationProvider());
@@ -72,6 +74,7 @@ public class MySecurityConfig {
 
 	@Bean
 	public AuthenticationProvider authenticationProvider() {
+		
 		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
 		authenticationProvider.setUserDetailsService(userDetailsService());
 		authenticationProvider.setPasswordEncoder(passwordEncoder());
