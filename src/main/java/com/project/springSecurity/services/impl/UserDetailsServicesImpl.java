@@ -24,10 +24,12 @@ public class UserDetailsServicesImpl implements UserDetailsService {
 
 		logger.debug("Entering in loadUserByUsername Method...");
 		User user = userRepository.findByEmail(username);
+		
 		if (user == null) {
 			logger.error("Username not found: " + username);
 			throw new UsernameNotFoundException("could not found user..!!");
 		}
+		
 		logger.info("User Authenticated Successfully..!!!");
 		return user;
 	}

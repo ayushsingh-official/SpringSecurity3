@@ -4,5 +4,5 @@ package com.project.springSecurity.model;
 //@Table(name = "role")
 public enum Role {
 
-	ADMIN, USER
+	SUPERADMIN,ADMIN,USER
 }

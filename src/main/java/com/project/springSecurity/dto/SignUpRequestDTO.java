@@ -1,5 +1,7 @@
 package com.project.springSecurity.dto;
 
+import com.project.springSecurity.model.Role;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,5 +20,8 @@ public class SignUpRequestDTO {
 	private String email;
 
 	private String password;
+
+//	@Enumerated(EnumType.STRING)
+	private Role role;
 
 }

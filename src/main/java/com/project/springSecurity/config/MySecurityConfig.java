@@ -22,7 +22,7 @@ import com.project.springSecurity.services.impl.UserDetailsServicesImpl;
 public class MySecurityConfig {
 
 	@Autowired
-	JwtAuthenticationFilter jwtAuthFilter;
+	JwtAuthenticationFilter jwtAuthenticationFilter;
 
 	@Bean
 	public UserDetailsService userDetailsService() {
@@ -49,23 +49,20 @@ public class MySecurityConfig {
 	 */
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		
+
 //		http.formLogin(Customizer.withDefaults());
 //		http.httpBasic(Customizer.withDefaults());
 //		http.authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated());
 //		http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/hello").authenticated());
-		
+
 		http.csrf(AbstractHttpConfigurer::disable);
-		http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/auth/**")
-				.permitAll()
-				.requestMatchers("/admin/**").hasAnyAuthority(Role.ADMIN.name())
-				.requestMatchers("/user/**").hasAnyAuthority(Role.USER.name())
-				.anyRequest()
-				.authenticated());
+		http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/auth/**").permitAll()
+				.requestMatchers("/admin/**").hasAnyAuthority(Role.ADMIN.name()).requestMatchers("/user/**")
+				.hasAnyAuthority(Role.USER.name()).anyRequest().authenticated());
 
 		http.sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 		http.authenticationProvider(authenticationProvider());
-		http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+		http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
 		// do filter before BasicAuthenticationFilter class
 //		http.addFilterBefore(new MyCustomFilter(), BasicAuthenticationFilter.class);
@@ -74,7 +71,7 @@ public class MySecurityConfig {
 
 	@Bean
 	public AuthenticationProvider authenticationProvider() {
-		
+
 		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
 		authenticationProvider.setUserDetailsService(userDetailsService());
 		authenticationProvider.setPasswordEncoder(passwordEncoder());
