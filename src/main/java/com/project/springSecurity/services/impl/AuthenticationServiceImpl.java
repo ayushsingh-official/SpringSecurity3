@@ -21,6 +21,9 @@ import com.project.springSecurity.services.JWTServices;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
 	@Autowired
+	private JWTServices JWTServices;
+
+	@Autowired
 	private UserRepository userRepository;
 
 	@Autowired
@@ -54,8 +57,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		System.out.println("authentication : " + authentication.isAuthenticated());
 		System.out.println("AUTHENTICATION DONE........");
 
-		User user = new User();
-		user.setEmail(loginRequestDto.getEmail());
+		User user = new User(loginRequestDto.getEmail());
+//		user.setEmail(loginRequestDto.getEmail());
 //		user.setUse(loginRequestDto.getEmail());
 
 		if (authentication.isAuthenticated()) {

@@ -12,7 +12,6 @@ import com.project.springSecurity.dto.JwtResponseDTO;
 import com.project.springSecurity.dto.LoginRequestDTO;
 import com.project.springSecurity.dto.SignUpRequestDTO;
 import com.project.springSecurity.model.User;
-import com.project.springSecurity.services.JWTServices;
 import com.project.springSecurity.services.impl.AuthenticationServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -21,9 +20,6 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
-
-	@Autowired
-	private JWTServices JWTServices;
 
 	@Autowired
 	private AuthenticationServiceImpl authenticationServiceImpl;

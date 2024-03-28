@@ -17,6 +17,7 @@ import lombok.Data;
 import lombok.NonNull;
 
 @Data
+
 @Entity
 @Table(name = "user")
 public class User implements UserDetails {
@@ -40,7 +41,6 @@ public class User implements UserDetails {
 
 	private String password;
 
-//	@Enumerated(EnumType.STRING)
 	private Role role;
 
 	@Override
